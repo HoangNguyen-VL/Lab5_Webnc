@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Danh sách sản phẩm</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Danh sách sản phẩm</h1>
+            <nav>
+                <ul>
+                    <li><a href="/products">Sản phẩm</a></li>
+                    <li><a href="/cart">Giỏ hàng</a></li>
+                </ul>
+            </nav>
+        </header>
+        <main>
+            <div class="product-list">
+                <% products.forEach(product => { %>
+                    <div class="product-item">
+                        <img src="<%= product.imageUrl %>" alt="<%= product.name %>">
+                        <h2><%= product.name %></h2>
+                        <p class="price"><%= product.price.toLocaleString('vi-VN') %> đ</p>
+                        <a href="/products/<%= product._id %>" class="btn">Xem chi tiết</a>
+                        <form action="/cart/add/<%= product._id %>" method="POST">
+                            <button type="submit" class="btn">Thêm vào giỏ hàng</button>
+                        </form>
+                    </div>
+                <% }); %>
+            </div>
+        </main>
+    </div>
+</body>
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Giỏ hàng</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Giỏ hàng</h1>
+            <nav>
+                <ul>
+                    <li><a href="/products">Sản phẩm</a></li>
+                    <li><a href="/cart">Giỏ hàng</a></li>
+                </ul>
+            </nav>
+        </header>
+        <main>
+            <div class="cart-list">
+                <% if (cart.length === 0) { %>
+                    <p>Giỏ hàng trống</p>
+                <% } else { %>
+                    <% cart.forEach(item => { %>
+                        <div class="cart-item">
+                            <img src="<%= item.imageUrl %>" alt="<%= item.name %>">
+                            <div class="item-details">
+                                <h2><%= item.name %></h2>
+                                <p class="item-price"><%= item.price.toLocaleString('vi-VN') %> đ</p>
+                            </div>
+                            <form action="/cart/remove/<%= item._id %>" method="POST">
+                                <button type="submit" class="btn">Xóa</button>
+                            </form>
+                        </div>
+                    <% }); %>
+                    <div class="cart-total">
+                        Tổng cộng: <%= cart.reduce((total, item) => total + item.price, 0).toLocaleString('vi-VN') %> đ
+                    </div>
+                <% } %>
+            </div>
+        </main>
+    </div>
+</body>
+</html>
